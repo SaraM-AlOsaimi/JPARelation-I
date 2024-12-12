@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Check;
 
+import java.util.Set;
+
 @Data
 @Check(constraints = "age >= 18")
 @Check(constraints = "salary > 0")
@@ -48,4 +50,6 @@ public class Teacher {
     @PrimaryKeyJoinColumn
     private Address address;
 
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "teacher")
+    private Set<Course> courses;
 }

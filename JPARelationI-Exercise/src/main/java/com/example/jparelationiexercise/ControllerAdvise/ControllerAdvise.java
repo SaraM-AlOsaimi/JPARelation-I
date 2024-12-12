@@ -3,10 +3,12 @@ package com.example.jparelationiexercise.ControllerAdvise;
 import com.example.jparelationiexercise.API.ApiException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @ControllerAdvice
 public class ControllerAdvise {
@@ -35,4 +37,17 @@ public class ControllerAdvise {
         return ResponseEntity.status(400).body(msg);
     }
 
+    @ExceptionHandler(value = NoResourceFoundException.class)
+    public ResponseEntity<?> NoResourceFoundException(NoResourceFoundException e){
+        String msg = e.getMessage();
+        return ResponseEntity.status(400).body(msg);
+    }
+
+    @ExceptionHandler(value = HttpMessageNotWritableException.class)
+    public ResponseEntity<?> HttpMessageNotWritableException(HttpMessageNotWritableException e){
+        String msg = e.getMessage();
+        return ResponseEntity.status(400).body(msg);
+    }
+
 }
+

@@ -2,8 +2,10 @@ package com.example.jparelationiexercise.Service;
 
 import com.example.jparelationiexercise.API.ApiException;
 import com.example.jparelationiexercise.Model.Address;
+import com.example.jparelationiexercise.Model.Course;
 import com.example.jparelationiexercise.Model.Teacher;
 import com.example.jparelationiexercise.Repository.AddressRepository;
+import com.example.jparelationiexercise.Repository.CourseRepository;
 import com.example.jparelationiexercise.Repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
     private final AddressRepository addressRepository;
+    private final CourseRepository courseRepository;
 
 
     public List<Teacher> getAllTeachers(){
@@ -54,7 +57,7 @@ public class TeacherService {
     }
 
 
-    // Create endpoint that takes teacher id and return All teacher details
+//     Create endpoint that takes teacher id and return All teacher details
     public Teacher getTeacherDetails(Integer id){
         Teacher teacher = teacherRepository.findTeacherById(id);
             if(teacher==null){
@@ -62,5 +65,15 @@ public class TeacherService {
         }
        return teacher;
     }
+
+//    public String getTeacherNameForCourse(Integer course_id){
+//        Course course = courseRepository.findCourseById(course_id);
+//        if(course==null){
+//            throw new ApiException("Course not found");
+//        }
+//       Teacher teacher = course.getTeacher();
+//        return teacher.getName();
+//    }
+
 
 }

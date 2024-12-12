@@ -44,4 +44,6 @@ public class TeacherController {
     public ResponseEntity<?> getTeacherDetails(@PathVariable Integer id){
         return ResponseEntity.status(200).body(teacherService.getTeacherDetails(id));
     }
+
+
 }
