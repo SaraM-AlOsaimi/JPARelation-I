@@ -1,7 +1,7 @@
 package com.example.jparelationiexercise.Controller;
 
 import com.example.jparelationiexercise.API.ApiResponse;
-import com.example.jparelationiexercise.DTO.AddressDTO;
+import com.example.jparelationiexercise.InputDTO.AddressDTO;
 import com.example.jparelationiexercise.Service.AddressService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

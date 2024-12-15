@@ -1,14 +1,16 @@
 package com.example.jparelationiexercise.Service;
 
 import com.example.jparelationiexercise.API.ApiException;
-import com.example.jparelationiexercise.DTO.AddressDTO;
+import com.example.jparelationiexercise.InputDTO.AddressDTO;
 import com.example.jparelationiexercise.Model.Address;
 import com.example.jparelationiexercise.Model.Teacher;
+import com.example.jparelationiexercise.OutDTO.OutAddressDTO;
 import com.example.jparelationiexercise.Repository.AddressRepository;
 import com.example.jparelationiexercise.Repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,9 +21,20 @@ public class AddressService {
     private final TeacherRepository teacherRepository;
 
 
-    public List<Address> getAllAddresses(){
-        return addressRepository.findAll();
+    public List<OutAddressDTO> getAllAddresses(){
+      List<Address> addresses = addressRepository.findAll();
+      List<OutAddressDTO> outAddressDTOS = new ArrayList<>();
+
+      for (Address a : addresses){
+          OutAddressDTO outAddressDTO = new OutAddressDTO(a.getId(),a.getArea(),a.getStreet(),a.getBuildingNumber());
+          outAddressDTOS.add(outAddressDTO);
+      }
+      return outAddressDTOS;
     }
+
+//    public List<Address> getAllAddresses(){
+//        return addressRepository.findAll();
+//    }
 
     public void addTeacherAddress(AddressDTO addressDTO){
         Teacher teacher = teacherRepository.findTeacherById(addressDTO.getTeacher_id());

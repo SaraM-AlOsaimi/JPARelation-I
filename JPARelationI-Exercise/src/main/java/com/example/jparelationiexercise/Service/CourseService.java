@@ -2,12 +2,17 @@ package com.example.jparelationiexercise.Service;
 
 import com.example.jparelationiexercise.API.ApiException;
 import com.example.jparelationiexercise.Model.Course;
+import com.example.jparelationiexercise.Model.Student;
 import com.example.jparelationiexercise.Model.Teacher;
+import com.example.jparelationiexercise.OutDTO.CourseDTO;
+import com.example.jparelationiexercise.OutDTO.StudentDTO;
 import com.example.jparelationiexercise.Repository.CourseRepository;
+import com.example.jparelationiexercise.Repository.StudentRepository;
 import com.example.jparelationiexercise.Repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,9 +21,17 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
 
-    public List<Course> getAllCourses(){
-      return courseRepository.findAll();
+    public List<CourseDTO> getAllCourses(){
+       List<Course> courses = courseRepository.findAll();
+       List<CourseDTO> courseDTOS = new ArrayList<>();
+
+       for(Course c : courses){
+         CourseDTO  courseDTO = new CourseDTO(c.getName());
+         courseDTOS.add(courseDTO);
+       }
+       return courseDTOS;
     }
 
     public void addCourse(Course course){
@@ -64,5 +77,16 @@ public class CourseService {
         return "Teacher name for course with id " +  course_id + " is: " + teacher.getName();
     }
 
+    // take course id and return the list of students
+    public List<StudentDTO> getStudentInCourse(Integer course_id){
+        List<Student> students = studentRepository.findAll();
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+
+        for (Student s : students){
+            StudentDTO studentDTO = new StudentDTO(s.getName(),s.getMajor(),s.getGPA());
+            studentDTOS.add(studentDTO);
+        }
+        return studentDTOS;
+    }
 
 }

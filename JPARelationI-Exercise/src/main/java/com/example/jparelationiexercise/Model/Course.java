@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -23,4 +25,8 @@ public class Course {
     @ManyToOne
     @JsonIgnore
     private Teacher teacher;
+
+    @ManyToMany
+    @JsonIgnore
+    private Set<Student> students;
 }

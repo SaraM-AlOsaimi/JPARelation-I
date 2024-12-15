@@ -52,4 +52,5 @@ public class Teacher {
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "teacher")
     private Set<Course> courses;
+
 }
